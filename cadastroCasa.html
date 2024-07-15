@@ -1,11 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro Casa</title>
+    <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
+
+    <nav>
+        <ul class="menu">
+            <li>
+                <a href="home.html">Home</a>
+            </li>
+            <li>
+                <a href="#">Sobre</a>
+            </li>
+            <li>
+                <a href="#">O que fazemos?</a>
+                <ul>
+                    <li>
+                        <a href="cadastroCasa.html">Cadastro Casa</a>
+                    </li>
+                    <li>
+                        <a href="cadastroInquilino.html">Cadastro Inquilino</a>
+                    </li>
+                    <li>
+                        <a href="ListagemApAtivos.html">Listagem Ap.Ativos</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Contato</a>
+            </li>
+
+
+        </nav>
+
+
+
+    <div class="container_cadastro_casa">
+        
+        <h1>Cadastro de Apartamento</h1>
+        
+
+        <input type="number" id="numeroap" name="numeroap" placeholder="Número do Apartamento" required><br>
+
+        <input type="number" id="bloco" name="bloco" placeholder="Bloco" required><br>
+
+        <input type="number" id="numerorel" name="numerorel" placeholder="Número do Relógio" required><br>
+
+        <input type="number" id="kwhinicial" name="kwhinicial" placeholder="Kwh Inicial" required><br>
+
+        <input type="number" id="kwhatual" name="kwhatual" placeholder="Kwh Atual" required><br>
+
+        <div class="button-group">
+            <button type="submit">Salvar</button>
+            <button type="submit" class="submit">Cancelar</button>
+        </div>
+        
+     </form>
+
+
     
 </body>
-</html>git remote add origin <link do repositório>
+</html> <link do repositório>
