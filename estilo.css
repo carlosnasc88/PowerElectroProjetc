@@ -1,7 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
 
@@ -9,106 +13,92 @@ body {
     background-image: url(/img/Fundo\ Lista.png);
     background-repeat: no-repeat;
     background-size: cover;
-    display: flex;
-    justify-content: center;  
-    align-items: center;
-    height: 100vh;
+    display: flex; 
+    justify-content: center;    
+    min-height: 100vh;
+    
 
 }
+
 h2{
     font-size: 30px;
     color: #fff;    
     text-align: center;
     margin: 20px;
 }
-.login-box{
-    width: 350px;
-    background: rgba(0, 0, 0, 0.527);
-    border-radius: 20% 0;
-    color: #fff;
-    box-shadow: 1px 2px 10px #000,3px  6px 20px #000;
-    padding: 50px 20px;
-    
 
-}
-input{
-    width:  100%;
-    height: 46px;
-    background: transparent;
-    border: none;
-    outline: none;
-    border-bottom: 1px solid #fff;
-    color: #fff;
-    
-}
-.input-box{
-    position: relative;
-    margin-bottom: 20px;
-}
-
-.repurasenha{
-    position: relative;
-    margin-bottom: 20px;  
-
-
-}
-label{
-
+.navegacao_home {
     position: absolute;
-    top: 0;
-    left: 0;
-    color: #fff;
-    transform: translatey(18px);
-    
-
-}
-input:focus{
-    border-bottom: 2px solid #26a96a;
-    box-shadow: 0 1px 0 0 #26a96a;
-
-}
-input:focus + label{
-    transform: translateY(-14px) scale(.8);
-    color: #26a96a;
-    font-weight: bold;
-
-
+    top: 20%;
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    text-align: center; 
 }
 
 
-button{
-    padding: 15px 50px;
-    margin: 20px;
-    background: transparent;
-    border: 2px solid #fff;
-    color: #fff;
-    text-transform: uppercase;
-    border-radius: 20px;
+.navegacao_home input{
+visibility: hidden;
+display: none;
+
+}
+
+.botaoMenuInicial{
+    position: relative;
+    display: flex;
+    gap: 180px;
+    padding: 50px 260px;
+    border-bottom: 1px solid rgba(80, 21, 21, 0.2);
+    background: rgba(180, 241, 252, 0.527);
+    border-radius: 30px;
+    overflow: hidden;
+}
+.botaoMenuInicial label{
+    font-size: 1.75rem;
+    -webkit-text-stroke: 1px #fff;
+    color: transparent;
+    opacity: .9;
     cursor: pointer;
-    transition: ease-in-out .25s;
+    transition: .5s;
+}
+.botaoMenuInicial label:hover{
+    opacity: 1;
+    filter: drop-shadow(0 0 10px #fff) drop-shadow(0 0 20px #fff);
 
 }
-button:hover{
-    background: rgba(0, 255, 191, 0.5);
 
+.navegacao_home input:nth-last-of-type(1):checked label:nth-of-type(1),
+.navegacao_home input:nth-last-of-type(2):checked label:nth-of-type(2),
+.navegacao_hoe input:nth-last-of-type(3):checked label:nth-of-type(3),
+.navegacao_home input:nth-last-of-type(4):checked label:nth-of-type(4),
+.navegacao_home input:nth-last-of-type(5):checked label:nth-of-type(5)
+{
+    color: #fff;
+    opacity: 1;
+    filter: drop-shadow(0 0 10px #fff) drop-shadow(0 0 20px #fff);
+}
+
+.navegacao_home input:nth-last-of-type(1):checked~ .botaoMenuInicial .underline{
+    left: 0;
+}
+.navegacao_home input:nth-last-of-type(2):checked~ .botaoMenuInicial .underline{
+    left: 0%;
+}
+.navegacao_home input:nth-last-of-type(3):checked~ .botaoMenuInicial .underline{
+    left: 40%;
+}
+.navegacao_home input:nth-last-of-type(4):checked~ .botaoMenuInicial .underline{
+    left: 60%;
+}
+.navegacao_home input:nth-last-of-type(5):checked~ .botaoMenuInicial .underline{
+    left: 80%;
 }
 
 
-.center{
-    text-align: center;
-}
 
 
-a{
-    text-decoration: none;
-    color: #fff; 
 
 
-}
-a:hover{
-    color: #26a96a;
-
-}
+/* Personalizaçaõd o Menu_Cabeçaho   */
 .menu {
     list-style: none;
    /* border: 1px solid #26a96a;*/
@@ -118,10 +108,6 @@ a:hover{
     position: absolute;
     top: 0;
     right: 0;
-    
-    
-
-
 }
 
 
@@ -160,3 +146,68 @@ a:hover{
     display: block;
     width: 150px;
 }
+/*Fim Personalizaçaõd o Menu_Cabeçaho */
+
+
+
+
+
+
+/*Pesornalização do Catradsto Casa*/
+.container_cadastro_casa {
+    max-width: 600px;
+    margin:  auto;
+    padding: 50px 100px;
+    border: 1px solid #ccc; 
+    border-radius: 50px;
+    background: rgba(0, 0, 0, 0.527);
+    text-align: center; 
+    color: #fff;
+    box-shadow: 1px 2px 10px #000,3px  6px 20px #000;
+}
+
+.container_cadastro_casa h1 {
+    margin-bottom: 30px;
+    font-size: 24px;   
+    text-align: center; 
+    color: #fff;
+   
+}
+
+.container_cadastro_casa input[type="number"],[type="text"] {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    border: 1px solid #56caf8;
+    border-radius: 5px;  
+    background: rgba(7, 86, 110, 0.5); /* Fundo transparente dos inputs */
+    color: #fffbfb; /* Texto preto para contraste */
+    
+}
+
+.container_cadastro_casa .button-group {
+    text-align: center;
+    margin-top: 30px;;
+}
+
+.container_cadastro_casa .button-group button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.container_cadastro_casa .button-group button.submit {
+    background-color: #28a745;
+    margin-left: 0;
+}
+
+.container_cadastro_casa .button-group button:hover {
+    opacity: 0.8;
+}
+
+/
