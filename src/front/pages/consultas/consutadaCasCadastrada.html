@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta Apartamentos</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+
+<nav>
+    <ul class="menu">
+        <li><a href="/home.html">Home</a></li>
+        <li><a href="#">Sobre</a></li>
+        <li>
+            <a href="#">O que fazemos?</a>
+            <ul>
+                <li><a href="/src/pages/cadastro/cadastroCasa.html">Cadastro Casa</a></li>
+                <li><a href="/src/pages/cadastro/cadastroInquilino.html">Cadastro Inquilino</a></li>
+                <li><a href="/src/pages/consulta/listagemApartamentos.html">Consulta Apartamentos</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Contato</a></li>
+    </ul>
+</nav>
+
+<div class="container_consulta_apartamentos">
+    <h1>Consulta de Apartamentos</h1>
+    <table id="tabelaApartamentos">
+        <thead>
+            <tr>
+                <th>Número do Apartamento</th>
+                <th>Bloco</th>
+                <th>Número do Relógio</th>
+                <th>Kwh Inicial</th>
+                <th>Kwh Atual</th>
+                <th>Kwh Total</th>
+                <th>Valor Kwh (R$)</th>
+                <th>Valor Total (R$)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Dados serão inseridos aqui via JavaScript -->
+        </tbody>
+    </table>
+
+    <div class="button-group">
+        <button onclick="window.location.href='cadastroCasa.html'">Cadastrar Nova Casa</button>
+        <button class="cancel" onclick="window.location.href='home2.html'">Cancelar</button>
+    </div>
+    
+</div>
+
+
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

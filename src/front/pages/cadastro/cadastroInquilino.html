@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Inquilino</title>
+    <link rel="stylesheet" href="/src/front/style/estilo.css">
+</head>
+<body>
+    <nav>
+        <ul class="menu">
+            <li><a href="/src/front/home.html">Home</a></li>
+            <li><a href="#">Sobre</a></li>
+            <li>
+                <a href="#">O que fazemos?</a>
+                <ul>
+                    <li><a href="/src/front/pages/cadastro/cadastroCasa.html">Cadastro Casa</a></li>
+                    <li><a href="/src/front/pages/cadastro/cadastroInquilino.html">Cadastro Inquilino</a></li>
+                    <li><a href="/src/front/pages/listagem/listagemInquilinos.html">Listagem Inquilinos</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Contato</a></li>
+        </ul>
+    </nav>
+
+    <div class="container_cadastro">
+        <h1>Cadastro de Inquilino</h1>
+
+        <form id="formCadastroInquilino" class="container_cadastro_casa input">
+            <input type="text" id="nome" name="nome" placeholder="Nome Completo" required><br>
+            <input type="number" id="cpf" name="cpf" placeholder="CPF" required><br>
+            <input type="number" id="numerorel" name="numerorel" placeholder="Número do Apartamento" required><br>
+            <input type="text" id="bloco" name="bloco" placeholder="Bloco" required><br>
+            <input type="number" id="kwhatual" name="kwhatual" placeholder="Kwh Atual" required><br>
+            
+            <div class="button-group">
+                <button type="submit">Salvar</button>
+                <button type="button" onclick="window.location.href='home.html'" class="cancel">Cancelar</button>
+            </div>
+        </form>
+        <div class="button-group">
+            <button type="button" onclick="window.location.href='/listagemInquilinos.html'">Inquilinos Ativos</button>
+        </div>
+    </div>
+
+    <script src="/src/front/script/script.js"></script>
+</body>
+</html>

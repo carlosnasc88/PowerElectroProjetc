@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Consumo</title>
+    <link rel="stylesheet" href="estilo.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Importando o Chart.js -->
+</head>
+<body>
+
+<nav>
+    <ul class="menu">
+        <li><a href="home2.html">Home</a></li>
+        <li><a href="#">Sobre</a></li>
+        <li>
+            <a href="#">O que fazemos?</a>
+            <ul>
+                <li><a href="cadastroCasa.html">Cadastro Casa</a></li>
+                <li><a href="cadastroInquilino.html">Cadastro Inquilino</a></li>
+                <li><a href="consutadaCasCadastrada.html">Consulta Apartamentos</a></li>
+                <li><a href="dashboard.html">Dashboard de Consumo</a></li> <!-- Link para o dashboard -->
+            </ul>
+        </li>
+        <li><a href="#">Contato</a></li>
+    </ul>
+</nav>
+
+<div class="container_dashboard">
+    <h1>Dashboard de Consumo de Energia</h1>
+    <canvas id="graficoConsumo" width="600" height="400"></canvas> <!-- Canvas para o gráfico -->
+
+    <div class="button-group">
+        <button onclick="window.location.href='cadastroCasa.html'">Cadastrar Nova Casa</button>
+        <button class="cancel" onclick="window.location.href='home2.html'">Cancelar</button>
+    </div>
+</div>
+
+<script src="dashboard.js"></script> <!-- Importando o script JavaScript -->
+
+</body>
+</html>

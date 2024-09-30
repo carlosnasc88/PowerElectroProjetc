@@ -1,0 +1,14 @@
+{
+  "name": "PowerElectroProjetc-main3.3.45",
+  "version": "1.0.0",
+  "main": "node db.js",
+  "scripts": {
+    "start": "node db.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.11.0",
+    "pg": "^8.11.3"
+  }
+}

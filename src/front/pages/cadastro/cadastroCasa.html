@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro Casa</title>
+    <link rel="stylesheet" href="/src/front/style/estilo.css">
+</head>
+<body>
+
+<!-- Menu Hambúrguer -->
+<div class="menu-toggle" id="menu-toggle">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+</div>
+
+<nav class="menu">
+    <ul>
+        <li><a href="/home.html">Home</a></li>
+        <li><a href="#">Sobre</a></li>
+        <li>
+            <a href="#">O que fazemos?</a>
+            <ul>
+                <li><a href="/src/front/pages/cadastro/cadastroCasa.html">Cadastro Casa</a></li>
+                <li><a href="/src/front/pages/cadastro/cadastroInquilino.html">Cadastro Inquilino</a></li>
+                <li><a href="/src/front/pages/cadastro/consutadaCasCadastrada.html">Consulta Apartamentos</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Contato</a></li>
+    </ul>
+</nav>
+
+<div class="container_cadastro_casa">
+    <div id="error-message" style="color: red;"></div>
+    <h1>Cadastro de Apartamento</h1>
+    <form id="formCadastroCasa">
+        <input type="number" id="numeroap" name="numeroap" placeholder="Número do Apartamento" required><br>
+        <input type="text" id="bloco" name="bloco" placeholder="Bloco" required><br>
+        <input type="number" id="numerorel" name="numerorel" placeholder="Número do Relógio" required><br>
+        <input type="number" id="kwhinicial" name="kwhinicial" placeholder="Kwh Inicial" required><br>
+        <input type="number" id="kwhatual" name="kwhatual" placeholder="Kwh Atual" required><br>
+        <input type="hidden" id="kwhTotal" name="kwhTotal"><br>
+        <input type="number" id="valorKwh" name="valorKwh" placeholder="Valor Kwh (R$)" step="0.01" required><br>
+        <div class="button-group">
+            <button type="submit">Salvar</button>
+            <button type="button" class="submit" onclick="window.location.href='./home.html'">Cancelar</button>
+            <button type="button" onclick="window.location.href='./src/front/pages/consulta/listagemApartamentos.html'">Lista de Ativos</button>
+        </div>
+    </form>
+</div>
+
+<script src="/src/front/script/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,405 @@
+/* Importação de fontes */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+/* Reseta margens e preenchimentos e aplica fonte padrão */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Estilo do corpo da página */
+body {
+    background-image: url(/src/front/img/FundoLista.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex; 
+    justify-content: center;    
+    min-height: 100vh;
+}
+
+/* Estilo dos títulos h2 */
+/* h2 {
+    font-size: 30px;
+    color: #fff;    
+    text-align: center;
+    margin: 20px;
+} */
+
+/* Menu Hambúrguer */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.menu-toggle .bar {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+/* Menu de navegação cabeçalho */
+.menu {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 0 0 0 20px;
+}
+
+.menu ul {
+    display: flex;
+    gap: 20px;
+}
+
+.menu li {
+    position: relative;
+}
+
+.menu li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+    display: block;
+}
+
+.menu li a:hover {
+    background: #333;
+    color: #26a96a;
+    text-shadow: 0px 0px 5px #fff;
+}
+
+.menu li ul {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    display: none;
+}
+
+.menu li ul li {
+    border: 1px solid #c0c0c0;
+    width: 150px;
+}
+
+.menu li:hover ul {
+    display: block;
+}
+
+/* Estilo do container de cadastro de casa */
+.container_cadastro_casa {
+    max-width: 600px;
+    margin: auto;
+    padding: 50px 100px;
+    border: 1px solid #ccc; 
+    border-radius: 50px;
+    background: rgba(0, 0, 0, 0.527);
+    text-align: center; 
+    color: #fff;
+    box-shadow: 1px 2px 10px #000, 3px 6px 20px #000;
+}
+
+.container_cadastro_casa h1 {
+    margin-bottom: 30px;
+    font-size: 24px;   
+    color: #fff;
+}
+
+.container_cadastro_casa input[type="number"],
+.container_cadastro_casa input[type="text"] {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #56caf8;
+    border-radius: 5px;  
+    background: rgba(7, 86, 110, 0.5);
+    color: #fffbfb;
+}
+
+.container_cadastro_casa .button-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.container_cadastro_casa .button-group button {
+    padding: 10px 20px;
+    background-color: #46c2f3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.container_cadastro_casa .button-group button.submit {
+    background-color: #f36b49;
+}
+
+.container_cadastro_casa .button-group button:hover {
+    opacity: 0.8;
+}
+
+/* Estilo do container de consulta de apartamentos */
+.container_consulta_apartamentos {
+    max-width: 900px;
+    margin: auto;
+    padding: 50px 10px;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    background: rgba(0, 0, 0, 0.527);
+    text-align: center;
+    color: #fff;
+    box-shadow: 1px 2px 10px #000, 3px 6px 20px #000;
+}
+
+.container_consulta_apartamentos h1 {
+    margin-bottom: 30px;
+    font-size: 24px;
+    color: #fff;
+}
+
+#tabelaApartamentos {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+#tabelaApartamentos thead {
+    background-color: rgba(7, 86, 110, 0.5);
+}
+
+#tabelaApartamentos th, 
+#tabelaApartamentos td {
+    border: 1px solid #56caf8;
+    padding: 8px;
+    text-align: center;
+}
+
+#tabelaApartamentos th {
+    color: #fff;
+    font-weight: bold;
+}
+
+#tabelaApartamentos td {
+    color: #fff;
+}
+
+#tabelaApartamentos tr:nth-child(even) {
+    background-color: rgba(7, 86, 110, 0.5);
+}
+
+/* Estilo do container de listagem de inquilinos */
+.container_listagem {
+    max-width: 600px; 
+    margin: auto;
+    padding: 50px 10px; 
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    background: rgba(0, 0, 0, 0.6); 
+    text-align: center;
+    color: #fff; 
+    box-shadow: 1px 2px 10px #000, 3px 6px 20px #000; 
+}
+
+.container_listagem h1 {
+    margin-bottom: 40px;
+    font-size: 24px;
+    color: #fff;
+}
+
+#tabelaInquilinos {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+#tabelaInquilinos thead {
+    background-color: rgba(7, 86, 110, 0.5); 
+}
+
+#tabelaInquilinos th, 
+#tabelaInquilinos td {
+    border: 1px solid #56caf8; 
+    padding: 8px; 
+    text-align: center; 
+}
+
+#tabelaInquilinos th {
+    color: #fff; 
+    font-weight: bold; 
+}
+
+#tabelaInquilinos td {
+    color: #fff; 
+}
+
+#tabelaInquilinos tr:nth-child(even) {
+    background-color: rgba(7, 86, 110, 0.2); 
+}
+
+/* Estilo dos botões salvar e cancelar */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.button-group button {
+    background-color: #56caf8; 
+    color: #fff; 
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.button-group button:hover {
+    background-color: #3394d4; 
+}
+
+.button-group .cancel {
+    background-color: #ff5c5c; 
+}
+
+.button-group .cancel:hover {
+    background-color: #e03a3a; 
+}
+
+/* Estilo do Dashboard */
+.container_dashboard {
+    max-width: 800px;
+    margin: auto;
+    padding: 50px 20px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.container_dashboard h1 {
+    margin-bottom: 30px;
+    font-size: 28px;
+    color: #fff;
+}
+
+#graficoConsumo {
+    width: 100%;
+    height: 400px;
+    border: 2px solid transparent; 
+    border-radius: 10px;
+}
+
+.button-group {
+    margin-top: 20px;
+}
+
+.button-group button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.button-group button.cancel {
+    background-color: #dc3545;
+}
+
+.button-group button:hover {
+    opacity: 0.8;
+}
+
+.button-group button.cancel:hover {
+    opacity: 0.8;
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 768px) {
+    .container_cadastro_casa {
+        padding: 20px 30px;
+    }
+
+    .button-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .menu {
+        display: none; /* Oculta o menu por padrão em dispositivos menores */
+    }
+
+    .menu-toggle {
+        display: flex; /* Exibe o botão de menu hambúrguer */
+    }
+}
+
+@media (max-width: 480px) {
+    .container_cadastro_casa {
+        padding: 15px;
+    }
+
+    .menu {
+        font-size: 14px;
+    }
+
+    .button-group {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+
+/*Menu ativo (comentado) */
+
+.menu.active {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu.active ul {
+    display: block;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.menu.active .bar:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 6px);
+}
+
+.menu.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.menu.active .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
