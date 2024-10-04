@@ -172,6 +172,25 @@ body {
     color: #fff;
 }
 
+/* Estilo para mensagens de sucesso e erro */
+#success-message, #error-message {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* Estilo para o carregando */
+#spinner {
+    margin-left: 10px;
+}
+.error-message {
+    color: red;
+}
+
+/* Estilo para mensagens de sucesso */
+.success-message {
+    color: green;
+}
+
 #tabelaApartamentos {
     width: 100%;
     border-collapse: collapse;

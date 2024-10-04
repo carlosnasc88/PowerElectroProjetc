@@ -1,115 +1,68 @@
-exports.adicionarApartamento = (req, res) => {
-    const { numeroap, bloco, numerorel, kwhinicial, kwhatual, kwhTotal, valorKwh, valorTotal } = req.body;
+// controllers/apartamentosController.js
+const express = require('express');
+const router = express.Router();
+const db = require('../database/db');
 
-    // Validação básica
-    if (!numeroap || !bloco || !numerorel || isNaN(kwhinicial) || isNaN(kwhatual) || isNaN(valorKwh)) {
-        return res.status(400).json({ message: 'Dados inválidos. Verifique os campos.' });
+// Rota para cadastrar apartamento
+router.post('/', (req, res) => {
+    console.log('Dados recebidos:', req.body); // Log dos dados recebidos
+
+    const { numeroap, bloco, numerorel, kwhinicial, kwhatual, valorKwh } = req.body;
+
+    // Verifique se os dados são válidos
+    if (!numeroap || !bloco || !numerorel || !kwhinicial || !kwhatual || !valorKwh) {
+        return res.status(400).json({ error: 'Todos os campos são obrigatórios.' });
     }
 
-    if (kwhatual < kwhinicial) {
-        return res.status(400).json({ message: 'O Kwh Atual não pode ser menor que o Kwh Inicial.' });
-    }
+    const ativo = true;
 
-    const query = 'INSERT INTO apartamentos (numeroap, bloco, numerorel, kwhinicial, kwhatual, kwhTotal, valorKwh, valorTotal) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-    
-    connection.query(query, [numeroap, bloco, numerorel, kwhinicial, kwhatual, kwhTotal, valorKwh, valorTotal], (err, results) => {
+    // Ajustando os placeholders para iniciar do $1
+    db.query(
+        'INSERT INTO apartamentos (numeroap, bloco, numerorel, kwhinicial, kwhatual, ativo, valorKwh) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+        [numeroap, bloco, numerorel, kwhinicial, kwhatual, ativo, valorKwh],
+        (err, result) => {
+            if (err) {
+                console.error('Erro ao salvar no banco:', err);
+                return res.status(500).json({ error: 'Erro ao salvar os dados' });
+            }
+            res.status(201).json({ message: 'Apartamento cadastrado com sucesso!' });
+        }
+    );
+});
+
+
+// Rota para obter apartamentos ativos
+router.get('/', (req, res) => {
+    console.log('Recebendo requisição para obter apartamentos ativos');
+    const ativo = req.query.ativo === 'true';
+
+    const query = 'SELECT * FROM apartamentos WHERE ativo = $1';
+    db.query(query, [ativo], (err, result) => {
         if (err) {
-            console.error('Erro ao salvar no banco de dados:', err);
-            res.status(500).json({ message: 'Erro ao salvar no banco de dados' });
-            return;
+            console.error('Erro ao buscar apartamentos:', err);
+            return res.status(500).json({ error: 'Erro ao buscar apartamentos' });
         }
-        res.status(200).json({ message: 'Apartamento cadastrado com sucesso' });
-    });
-};
-
-
-
-
-// GET - Obter todos os apartamentos
-app.get('http://localhost:5500/apartamentos', async (req, res) => {
-    try {
-        const result = await pool.query('SELECT * FROM apartamentos');
+        console.log('Apartamentos encontrados:', result.rows);
         res.status(200).json(result.rows);
-    } catch (err) {
-        console.error('Erro ao obter apartamentos:', err);
-        res.status(500).json({ error: 'Erro ao obter apartamentos' });
-    }
-});
-
-
-// POST - Criar um novo apartamento
-app.post('http://localhost:5500/apartamentos', async (req, res) => {
-    const { numero, bloco, numerorel, kwhinicial, kwhatual, kwhTotal, valorKwh, valorTotal } = req.body;
-    try {
-        const query = `
-            INSERT INTO apartamentos (numero, bloco, numerorel, kwhinicial, kwhatual, kwhTotal, valorKwh, valorTotal)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
-            RETURNING *`;
-        const values = [numero, bloco, numerorel, kwhinicial, kwhatual, kwhTotal, valorKwh, valorTotal];
-        const result = await pool.query(query, values);
-        res.status(201).json(result.rows[0]);
-    } catch (err) {
-        console.error('Erro ao salvar apartamento:', err);
-        res.status(500).json({ error: 'Erro ao salvar apartamento' });
-    }
+    });
 });
 
 
 
-// GET - Obter um apartamento por ID
-app.get('http://localhost:5500/apartamentos/:id', async (req, res) => {
-    const id = parseInt(req.params.id, 10);
-    try {
-        const result = await pool.query('SELECT * FROM apartamentos WHERE id = $1', [id]);
-        if (result.rows.length > 0) {
-            res.status(200).json(result.rows[0]);
-        } else {
-            res.status(404).json({ error: 'Apartamento não encontrado' });
+
+
+// Rota para deletar apartamento
+router.delete('/:numeroap', (req, res) => {
+    const numeroap = req.params.numeroap;
+
+    db.query('DELETE FROM apartamentos WHERE numeroap = $1', [numeroap], (err, result) => {
+        if (err) {
+            console.error('Erro ao deletar apartamento:', err);
+            return res.status(500).json({ error: 'Erro ao deletar apartamento' });
         }
-    } catch (err) {
-        console.error('Erro ao obter apartamento:', err);
-        res.status(500).json({ error: 'Erro ao obter apartamento' });
-    }
+        res.status(200).json({ message: 'Apartamento deletado com sucesso!' });
+    });
 });
 
 
-// PUT - Atualizar um apartamento
-app.put('http://localhost:5500/apartamentos/:id', async (req, res) => {
-    const id = parseInt(req.params.id, 10);
-    const { numero, bloco, numerorel, kwhinicial, kwhatual, kwhTotal, valorKwh, valorTotal } = req.body;
-    try {
-        const query = `
-            UPDATE apartamentos
-            SET numero = $1, bloco = $2, numerorel = $3, kwhinicial = $4, kwhatual = $5, kwhTotal = $6, valorKwh = $7, valorTotal = $8
-            WHERE id = $9
-            RETURNING *`;
-        const values = [numero, bloco, numerorel, kwhinicial, kwhatual, kwhTotal, valorKwh, valorTotal, id];
-        const result = await pool.query(query, values);
-        if (result.rows.length > 0) {
-            res.status(200).json(result.rows[0]);
-        } else {
-            res.status(404).json({ error: 'Apartamento não encontrado' });
-        }
-    } catch (err) {
-        console.error('Erro ao atualizar apartamento:', err);
-        res.status(500).json({ error: 'Erro ao atualizar apartamento' });
-    }
-});
-
-
-// DELETE - Deletar um apartamento
-app.delete('http://localhost:5500/apartamentos/:id', async (req, res) => {
-    const id = parseInt(req.params.id, 10);
-    try {
-        const result = await pool.query('DELETE FROM apartamentos WHERE id = $1 RETURNING *', [id]);
-        if (result.rows.length > 0) {
-            res.status(200).json({ message: 'Apartamento deletado com sucesso' });
-        } else {
-            res.status(404).json({ error: 'Apartamento não encontrado' });
-        }
-    } catch (err) {
-        console.error('Erro ao deletar apartamento:', err);
-        res.status(500).json({ error: 'Erro ao deletar apartamento' });
-    }
-});
-
+module.exports = router;
