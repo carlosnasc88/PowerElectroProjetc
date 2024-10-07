@@ -15,8 +15,6 @@
                 <a href="#">O que fazemos?</a>
                 <ul>
                     <li><a href="/src/front/pages/cadastro/cadastroCasa.html">Cadastro Casa</a></li>
-                    <li><a href="/src/front/pages/cadastro/cadastroInquilino.html">Cadastro Inquilino</a></li>
-                    <li><a href="/src/front/pages/listagem/ListagemApAtivos.html">Listagem Apartamentos</a></li>
                 </ul>
             </li>
             <li><a href="#">Contato</a></li>
@@ -28,28 +26,30 @@
         <table id="tabelaAtivos">
             <thead>
                 <tr>
-                    <th>Selecionar</th> <!-- Coluna de seleção -->
+                    <th>Selecionar</th>
                     <th>Número do Apartamento</th>
                     <th>Bloco</th>
                     <th>Número do Relógio</th>
                     <th>Kwh Inicial</th>
                     <th>Kwh Atual</th>
+                    <th>Inquilino</th>
+                    <th>CPF do Inquilino</th>
                     <th>Status</th>
                 </tr>
             </thead>
-            <tbody>
-                
+            <tbody id="tabelaInquilinos">
+                <!-- As linhas serão preenchidas dinamicamente aqui -->
             </tbody>
-        </table>
-
-        <div class="button-group">
-            <button id="btnEditar" onclick="editarSelecionados()">Editar</button>
-            <button id="btnDeletar" onclick="deletarSelecionados()">Deletar</button>
-            <button onclick="window.location.href='/src/front/pages/cadastro/cadastroCasa.html'">Cadastrar Nova Casa</button>
-            <button class="cancel" onclick="window.location.href='/home.html'">Cancelar</button>
-        </div>
+        </table>     
     </div>
 
-    <script src="/src/front/script/listagemAtivos.js"></script>
+    <div class="button-group">
+        <button onclick="window.location.href='/src/front/pages/cadastro/cadastroCasa.html'">Cadastrar Nova Casa</button>
+        <button id="btnEditar" onclick="editarSelecionados()">Editar</button>
+        <button id="btnDeletar" onclick="deletarSelecionados()">Deletar</button>
+        <button class="cancel" onclick="window.location.href='/home.html'">Cancelar</button>
+    </div>
+
+    <script src="/src/front/script/listagemAtivos.js" defer></script>
 </body>
 </html>

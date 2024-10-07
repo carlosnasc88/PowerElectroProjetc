@@ -11,16 +11,18 @@ document.addEventListener('DOMContentLoaded', function () {
         const kwhatual = document.getElementById('kwhatual').value;
         const valorKwh = document.getElementById('valorKwh').value;
 
+        // Monta o objeto com os dados do apartamento
         const dadosCasa = {
             numeroap,
             bloco,
             numerorel,
-            kwhinicial,
-            kwhatual,
-            ativo: true, // Define como ativo por padrão ou modifique conforme sua lógica
-            valorKwh
+            kwhinicial: parseFloat(kwhinicial), // Certifique-se de que esses valores sejam números
+            kwhatual: parseFloat(kwhatual),
+            ativo: true, // Define como ativo por padrão
+            valorKwh: parseFloat(valorKwh)
         };
 
+        // Faz a requisição para o backend
         fetch('http://localhost:5500/apartamentos', {
             method: 'POST',
             headers: {
@@ -30,7 +32,9 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .then(response => {
             if (!response.ok) {
-                throw new Error('Resposta da API: ' + response.statusText);
+                return response.json().then(err => {
+                    throw new Error(err.error || 'Erro desconhecido');
+                });
             }
             return response.json();
         })
@@ -44,7 +48,8 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .catch(error => {
             console.error('Erro:', error);
-            document.getElementById('error-message').textContent = 'Erro ao salvar os dados: ' + error.message;
+            // Exibe a mensagem de erro específica retornada pela API
+            document.getElementById('error-message').textContent = 'Erro: ' + error.message;
             document.getElementById('error-message').className = 'error-message'; // Aplica a classe de erro
         });
     });
