@@ -2,9 +2,11 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const inquilinosRoutes = require('./routes/inquilinosRoutes'); 
+const inquilinosRoutes = require('./routes/inquilinosRoutes');
+const usuarioRoutes = require ('./routes/usuarioRoutes')
 const apartamentosRoutes = require('./controllers/apartamentosController');
 const apartamentosController = require('./controllers/apartamentosController');
+
 const db = require('./database/db');
 
 
@@ -22,6 +24,7 @@ db.connect((err) => {
 app.use('/inquilinos', inquilinosRoutes); 
 app.use('/apartamentos', apartamentosRoutes);
 app.use('/apartamentos', apartamentosController);
+app.use('/usuarios', usuarioRoutes);
 
 const PORT = process.env.PORT || 5500;
 app.listen(PORT, () => {

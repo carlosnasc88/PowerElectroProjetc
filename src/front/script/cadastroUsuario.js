@@ -1,5 +1,4 @@
-function cadastrarUsuario() {
-    // Obtendo os valores do formulário
+async function cadastrarUsuario() {
     const nome = document.getElementById('nome').value;
     const email = document.getElementById('email').value;
     const senha = document.getElementById('senha').value;
@@ -10,18 +9,26 @@ function cadastrarUsuario() {
         return;
     }
 
-    // Criação do objeto usuário
     const usuario = {
         nome: nome,
         email: email,
         senha: senha
     };
 
-    // Simulação de envio de dados (pode ser substituído por um fetch para um backend)
-    console.log('Usuário cadastrado:', usuario);
+    try {
+        const response = await fetch('http://localhost:5500/usuarios/cadastrar', { 
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(usuario)
+        });
 
-    // Limpar os campos após o cadastro
-    document.getElementById('cadastro-form').reset();
-
-    alert('Usuário cadastrado com sucesso!');
+        const data = await response.json();
+        alert(data.message);
+        document.getElementById('cadastro-form').reset();
+    } catch (error) {
+        console.error('Erro:', error);
+        alert('Erro ao cadastrar o usuário');
+    }
 }
