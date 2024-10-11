@@ -68,12 +68,16 @@ input {
 .material-icons.md-48 {
     font-size: 48px; /* Ajuste conforme necessário */
     color: #e7e40e;
+    
+}
+.material-icons.md-36{
+  color: #070707;
 }
 
 .btn span {
     margin-top: 10px;
     font-size: 14px;
-    color: #03A9F4;
+    color: #070707;
 }
 
 .btn:hover {
@@ -92,35 +96,40 @@ input {
 }
 
 
-.btn {
+/* .btn {
 	-webkit-animation: pulsate-bck 0.5s ease-in-out infinite both;
 	        animation: pulsate-bck 0.5s ease-in-out infinite both;
-}
+} */
 
 .btn:nth-child(2) {
     top: 0px;
     transition-delay: 0s;
     color: #03A9F4;
+    text-decoration: none;
+    background-color:  rgba(66, 202, 236, 0.8);
 }
 
 .btn:nth-child(3) {
     top: 0px;
     left: 0px;
     transition-delay: 0.1s;
-    color: #03A9F4;
+    color: #03A9F4;    
+    text-decoration: none;
 }
 
 .btn:nth-child(4) {
     left: 0px;
     transition-delay: 0.2s;
-    color: #03A9F4;
+    color: #03A9F4;    
+    text-decoration: none;
 }
 
 .btn:nth-child(5) {
     top: 0px;
     left: 0px;
     transition-delay: 0.3s;
-    color: #03A9F4;
+    color: #03A9F4;    
+    text-decoration: none;
 }
 
 .btn:nth-child(6) {
@@ -134,6 +143,7 @@ input {
     top: 0px;
     transition-delay: 0.4s;
     color: #03A9F4;
+    text-decoration: none;
   }
   
   input#toggle:checked ~ #show-menu .btn:nth-child(6) {

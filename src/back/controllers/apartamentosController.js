@@ -64,7 +64,7 @@ router.get('/', (req, res) => {
     });
 });
 
-/// Rota para deletar apartamento
+
 // Rota para deletar apartamento
 router.delete('/:id', (req, res) => {
     const id = req.params.id; // Captura o ID do apartamento
