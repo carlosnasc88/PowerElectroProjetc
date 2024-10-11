@@ -17,38 +17,38 @@
 
 <nav class="menu">
     <ul>
-        <li><a href="/home.html">Home</a></li>
+        <li><a href="/src/front/home.html">Home</a></li>
         <li><a href="#">Sobre</a></li>
         <li>
             <a href="#">O que fazemos?</a>
-            <ul>
+           <!-- <ul>
                 <li><a href="/src/front/pages/cadastro/cadastroCasa.html">Cadastro Casa</a></li>
                 <li><a href="/src/front/pages/listagem/listagemInquilinos.html">Cadastro Inquilino</a></li>
                 <li><a href="/src/front/pages/listagem/ListagemApAtivos.html">Consulta Apartamentos</a></li>
-            </ul>
+            </ul>-->
         </li>
         <li><a href="#">Contato</a></li>
     </ul>
 </nav>
 
 <div class="container_cadastro_casa">
-    <div id="error-message" ></div>
+    <div id="error-message"></div>
     <h1>Cadastro de Apartamento</h1>
     <form id="formCadastroCasa">
-        <input type="number" id="numeroap" name="numeroap" placeholder="Número do Apartamento" required><br>
-        <input type="text" id="bloco" name="bloco" placeholder="Bloco" required><br>
-        <input type="number" id="numerorel" name="numerorel" placeholder="Número do Relógio" required><br>
-        <input type="number" id="kwhinicial" name="kwhinicial" placeholder="Kwh Inicial" required><br>
-        <input type="number" id="kwhatual" name="kwhatual" placeholder="Kwh Atual" required><br>
-        <input type="number" id="valorKwh" name="valorKwh" placeholder="Valor Kwh (R$)" step="0.01" required><br>
+        <input type="number" class="input" id="numeroap" name="numeroap" placeholder="Número do Apartamento" required>
+        <input type="text" class="input" id="bloco" name="bloco" placeholder="Bloco" required>
+        <input type="number" class="input" id="numerorel" name="numerorel" placeholder="Número do Relógio" required>
+        <input type="number" class="input" id="kwhinicial" name="kwhinicial" placeholder="Kwh Inicial" required>
+        <input type="number" class="input" id="kwhatual" name="kwhatual" placeholder="Kwh Atual" required>
+        <input type="number" class="input" id="valorKwh" name="valorKwh" placeholder="Valor Kwh (R$)" step="0.01" required>
         <div class="button-group">
             <button type="submit">Salvar</button>
-            <button type="button" class="submit" onclick="window.location.href='./home.html'">Cancelar</button>
+            <button type="button" class="submit" onclick="window.location.href='/src/front/home.html'">Cancelar</button>
             <button type="button" onclick="window.location.href='/src/front/pages/listagem/ListagemApAtivos.html'">Lista de Ativos</button>
-
         </div>
     </form>
 </div>
+
 
 
 <script src="/src/front/script/apartamentos.js"></script>

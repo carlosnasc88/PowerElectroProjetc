@@ -64,17 +64,25 @@ router.get('/', (req, res) => {
     });
 });
 
+/// Rota para deletar apartamento
 // Rota para deletar apartamento
-router.delete('/:numeroap', (req, res) => {
-    const numeroap = req.params.numeroap;
+router.delete('/:id', (req, res) => {
+    const id = req.params.id; // Captura o ID do apartamento
 
-    db.query('DELETE FROM apartamentos WHERE numeroap = $1', [numeroap], (err, result) => {
+    db.query('DELETE FROM apartamentos WHERE id = $1', [id], (err, result) => {
         if (err) {
             console.error('Erro ao deletar apartamento:', err);
             return res.status(500).json({ error: 'Erro ao deletar apartamento' });
-        }d
+        }
+
+        if (result.rowCount === 0) {
+            return res.status(404).json({ error: 'Apartamento não encontrado' });
+        }
+
         res.status(200).json({ message: 'Apartamento deletado com sucesso!' });
     });
 });
+
+
 
 module.exports = router;

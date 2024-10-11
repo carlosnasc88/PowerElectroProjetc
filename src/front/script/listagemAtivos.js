@@ -1,60 +1,9 @@
-// Função para buscar apartamentos ativos
 document.addEventListener('DOMContentLoaded', () => {
-    // Chama a função para buscar os dados do banco de dados
-    fetchDados();
+    buscarApartamentos();
 });
 
-function fetchDados() {
-    fetch('http://localhost:5500/apartamentos') // Ajuste a URL conforme necessário
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Erro ao buscar dados: ' + response.statusText);
-            }
-            return response.json(); // Supondo que a resposta seja em JSON
-        })
-        .then(data => {
-            // Chama a função para preencher a tabela com os dados recebidos
-            preencherTabela(data);
-        })
-        .catch(error => {
-            console.error('Erro:', error);
-        });
-}
-
-function preencherTabela(dados) {
-    const tabelaInquilinos = document.getElementById('tabelaInquilinos');
-    tabelaInquilinos.innerHTML = ''; // Limpa a tabela antes de preencher
-
-    // Loop pelos dados e cria linhas da tabela
-    dados.forEach(apartamento => {
-        const linha = document.createElement('tr');
-        linha.setAttribute('data-cpf', apartamento.cpf); // Ajuste conforme sua estrutura de dados
-
-        linha.innerHTML = `
-            <td><input type="checkbox"></td>
-            <td>${apartamento.numero}</td>
-            <td>${apartamento.bloco}</td>
-            <td>${apartamento.numRelogio}</td>
-            <td>${apartamento.kwhInicial}</td>
-            <td>${apartamento.kwhAtual}</td>
-            <td>${apartamento.inquilino}</td>
-            <td>${apartamento.cpf}</td>
-            <td>${apartamento.status}</td>
-        `;
-
-        tabelaInquilinos.appendChild(linha);
-    });
-}
-
-
-
-
-
-
-
-
 function buscarApartamentos() {
-    fetch('http://localhost:5500/apartamentos?ativo=true') // URL para obter os apartamentos ativos
+    fetch('http://localhost:5500/apartamentos?ativo=true')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Erro ao buscar apartamentos');
@@ -67,7 +16,7 @@ function buscarApartamentos() {
 
             apartamentos.forEach(apartamento => {
                 const linha = document.createElement('tr');
-                linha.setAttribute('data-cpf', apartamento.cpf_inquilino); // Assume que o campo é cpf_inquilino
+                linha.setAttribute('data-id', apartamento.id); // Captura o ID do apartamento
 
                 linha.innerHTML = `
                     <td><input type="checkbox"></td>
@@ -80,7 +29,7 @@ function buscarApartamentos() {
                     <td>${apartamento.cpf_inquilino}</td>
                     <td>${apartamento.ativo ? 'Ativo' : 'Inativo'}</td>
                 `;
-                
+
                 tabelaInquilinos.appendChild(linha);
             });
         })
@@ -93,37 +42,59 @@ function deletarSelecionados() {
     const checkboxes = document.querySelectorAll('#tabelaAtivos input[type="checkbox"]:checked');
 
     if (checkboxes.length === 0) {
-        alert("Selecione pelo menos um inquilino para deletar.");
+        alert("Selecione pelo menos um apartamento para deletar.");
         return;
     }
 
+    // Pergunta de confirmação
+    if (!confirm("Tem certeza que deseja excluir?")) {
+        return; // Cancela a operação se o usuário clicar em "Cancelar"
+    }
+
+    const idsParaDeletar = [];
+    
     checkboxes.forEach(checkbox => {
         const linha = checkbox.closest('tr');
-        const cpf = linha.getAttribute('data-cpf');
-        console.log(`Tentando deletar o inquilino com CPF: ${cpf}`); // Verificação do CPF
+        const id = linha.getAttribute('data-id'); // Captura o ID do apartamento
+        idsParaDeletar.push(id); // Adiciona o ID a lista
+    });
 
-        // Validação do CPF
-        if (cpf && !isNaN(cpf)) {
-            fetch(`http://localhost:5500/inquilinos/${cpf}`, {
-                method: 'DELETE'
-            })
-            .then(response => {
-                if (response.ok) {
-                    linha.remove();
-                    console.log(`Inquilino com CPF ${cpf} deletado com sucesso.`);
-                } else {
-                    console.error(`Erro ao deletar inquilino com CPF ${cpf}.`);
-                }
-            })
-            .catch(error => {
-                console.error(`Erro na requisição para deletar o inquilino com CPF ${cpf}:`, error);
-            });
-        } else {
-            console.error(`CPF inválido: ${cpf}`); // Mensagem de erro se o CPF for inválido
-        }
+    // Executa a exclusão
+    Promise.all(idsParaDeletar.map(id => {
+        return fetch(`http://localhost:5500/apartamentos/${id}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro ao deletar apartamento com ID ${id}.`);
+            }
+            return id; // Retorna o ID para o próximo then
+        });
+    }))
+    .then(deletedIds => {
+        deletedIds.forEach(id => {
+            const linha = document.querySelector(`tr[data-id="${id}"]`);
+            if (linha) linha.remove(); // Remove a linha da tabela
+        });
+        mostrarPopup("Apartamento deletado com sucesso!");
+    })
+    .catch(error => {
+        console.error(error);
+        alert('Ocorreu um erro ao tentar deletar os apartamentos.');
     });
 }
 
+function mostrarPopup(mensagem) {
+    // Cria o elemento popup
+    const popup = document.createElement('div');
+    popup.classList.add('popup-message');
+    popup.innerText = mensagem;
+    
+    document.body.appendChild(popup);
+    
+    // Remove o popup após 3 segundos
+    setTimeout(() => {
+        popup.remove();
+    }, 3000);
+}
 
-// Chama a função ao carregar a página
-window.onload = buscarApartamentos;

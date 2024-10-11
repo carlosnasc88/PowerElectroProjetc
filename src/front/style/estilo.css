@@ -1,40 +1,194 @@
-/* Importação de fontes */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
-
-/* Reseta margens e preenchimentos e aplica fonte padrão */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
 /* Estilo do corpo da página */
 body {
     background-image: url(/src/front/img/FundoLista.png);
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
-    justify-content: center;
-    min-height: 100vh;
-}
-
-/* Menu Hambúrguer */
-.menu-toggle {
-    display: none;
     flex-direction: column;
-    cursor: pointer;
-    position: absolute;
-    top: 20px;
-    right: 20px;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
 }
 
-.menu-toggle .bar {
-    width: 25px;
-    height: 3px;
-    background-color: #fff;
-    margin: 3px 0;
-    transition: 0.3s;
+/*cadastro inquilino*/
+.container_cadastro {
+    max-width: 600px;
+    margin: auto;
+    padding: 50px 100px;
+    border: 1px solid #ccc; 
+    border-radius: 50px;
+    background: rgba(0, 0, 0, 0.527);
+    text-align: center; 
+    color: #fff;
+    box-shadow: 1px 2px 10px #000, 3px 6px 20px #000;
+}
+
+.container_cadastro h1 {
+    margin-bottom: 30px;
+    font-size: 24px;   
+    color: #fff;
+}
+
+.container_cadastro input[type="number"],
+.container_cadastro input[type="text"] {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #56caf8;
+    border-radius: 5px;  
+    background: rgba(7, 86, 110, 0.5);
+    color: #fffbfb;
+}
+
+.container_cadastro .button-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.container_cadastro .button-group button {
+    padding: 10px 20px;
+    background-color: #46c2f3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.container_cadastro .button-group button.submit {
+    background-color: #f36b49;
+}
+
+.container_cadastro .button-group button:hover {
+    opacity: 0.8;
+}
+
+/* Estilo do container de cadastro de casa */
+.container_cadastro_casa {
+    max-width: 600px;
+    margin: auto;
+    padding: 50px 100px;
+    border: 1px solid #ccc; 
+    border-radius: 50px;
+    background: rgba(0, 0, 0, 0.527);
+    text-align: center; 
+    color: #fff;
+    box-shadow: 1px 2px 10px #000, 3px 6px 20px #000;
+}
+
+.container_cadastro_casa h1 {
+    margin-bottom: 30px;
+    font-size: 24px;   
+    color: #fff;
+}
+
+.container_cadastro_casa input[type="number"],
+.container_cadastro_casa input[type="text"] {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #56caf8;
+    border-radius: 5px;  
+    background: rgba(7, 86, 110, 0.5);
+    color: #fffbfb;
+}
+
+.container_cadastro_casa .button-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.container_cadastro_casa .button-group button {
+    padding: 10px 20px;
+    background-color: #46c2f3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.container_cadastro_casa .button-group button.submit {
+    background-color: #f36b49;
+}
+
+.container_cadastro_casa .button-group button:hover {
+    opacity: 0.8;
+}
+
+
+
+/* Container de listagem */
+.container_listagem {
+    max-width: 80%;
+    margin: 70px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    text-align: center;
+    color: #fff;
+    box-shadow: 1px 2px 10px #000, 3px 6px 20px #000;
+}
+
+/* Tabela de apartamentos */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    color: #fff;
+    font-size: 14px;
+}
+
+thead {
+    background: rgba(98, 189, 241, 0.4);
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+tbody tr:hover {
+    background: rgba(110, 208, 233, 0.4);
+}
+
+/* Botões */
+.button-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 15px; /* Espaço entre os botões */
+}
+
+button {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    width: auto; /* Garante que os botões não ocupem 100% da largura */
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+button.cancel {
+    background-color: #e74c3c;
+}
+
+button.cancel:hover {
+    background-color: #c0392b;
 }
 
 /* Menu de navegação */
@@ -51,11 +205,6 @@ body {
     border-radius: 0 0 0 20px;
 }
 
-.menu ul {
-    display: flex;
-    gap: 20px;
-}
-
 .menu li a {
     color: #fff;
     text-decoration: none;
@@ -69,182 +218,51 @@ body {
     text-shadow: 0px 0px 5px #fff;
 }
 
-/* Container de cadastro */
-.container_cadastro_casa {
-    max-width: 600px;
-    margin: auto;
-    padding: 50px 100px;
-    border: 1px solid #ccc;
-    border-radius: 50px;
-    background: rgba(0, 0, 0, 0.527);
-    text-align: center;
-    color: #fff;
-    box-shadow: 1px 2px 10px #000, 3px 6px 20px #000;
-}
-
-.container_cadastro_casa input[type="text"], 
-.container_cadastro_casa input[type="number"] {
-    width: 100%;
-    padding: 15px;
-    margin-bottom: 20px;
-    border: 1px solid #56caf8;
-    border-radius: 5px;
-    background: rgba(7, 86, 110, 0.5);
-    color: #fffbfb;
-}
-
-/* Grupos de botões */
-.button-group {
-    display: flex;
-    justify-content: center; /* Centraliza os botões horizontalmente */
-    gap: 10px; /* Espaço entre os botões */
-    position: absolute; /* Posiciona o grupo de botões na tela */
-    bottom: 70px; /* Define a distância da parte inferior da tela */
-    left: 50%; /* Centraliza horizontalmente */
-    transform: translateX(-50%); /* Corrige o alinhamento exato no centro */
-    margin-top: 30px;
-}
-
-.button-group button {
-    padding: 10px 20px;
-    background-color: #46c2f3;
-    color: #fff;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-}
-
-
-.button-group button.submit {
-    background-color: #f36b49;
-}
-
-.button-group button:hover {
-    opacity: 0.8;
-}
-
-/* Tabela de apartamentos */
-#tabelaApartamentos {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-}
-
-#tabelaApartamentos thead {
-    background-color: rgba(7, 86, 110, 0.5);
-}
-
-#tabelaApartamentos th, #tabelaApartamentos td {
-    border: 1px solid #56caf8;
-    padding: 8px;
-    text-align: center;
-    color: #fff;
-}
-
-/* Container de listagem de inquilinos */
-.container_listagem {
-    /*max-width: flz;*/
-    margin: auto;
-    padding: 50px 10px;
-    border: 1px solid #ccc;
-    border-radius: 50px;
-    background: rgba(0, 0, 0, 0.6);
-    text-align: center;
-    color: #fff;
-    box-shadow: 1px 2px 10px #000, 3px 6px 20px #000;
-}
-
-/* Dashboard */
-.container_dashboard {
-    max-width: 800px;
-    margin: auto;
-    padding: 50px 20px;
-    border: 1px solid #ccc;
-    border-radius: 15px;
-    background: rgba(0, 0, 0, 0.7);
-    text-align: center;
-    color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-}
-
-/* Media Queries para Tablets */
+/* Estilo responsivo */
 @media (max-width: 768px) {
-    .container_cadastro_casa,
-    .container_listagem,
-    .container_dashboard {
-        padding: 20px 30px;
-        max-width: 100%;
-    }
-
     .button-group {
         flex-direction: column;
         gap: 10px;
     }
 
-    .menu {
-        display: none; /* Esconde o menu padrão em telas menores */
+    button {
+        width: 80%; /* Limita o tamanho dos botões a 80% em telas menores, sem ocupar toda a largura */
+        max-width: 300px; /* Define um tamanho máximo para os botões */
+        margin: 0 auto; /* Centraliza os botões */
     }
 
-    .menu-toggle {
-        display: flex; /* Mostra o botão hambúrguer */
-    }
-}
-
-/* Media Queries para Celulares */
-@media (max-width: 480px) {
-    .container_cadastro_casa,
-    .container_listagem,
-    .container_dashboard {
-        padding: 15px;
-        max-width: 100%;
-    }
-
-    .button-group {
-        flex-direction:;
-        gap: 5px;
-    }
-
-    #tabelaApartamentos, #tabelaInquilinos {
-        font-size: 12px; /* Ajusta o tamanho da fonte */
-    }
-
-    .menu {
-        font-size: 14px;
-    }
-
-    .menu-toggle {
-        display: flex;
+    .container_listagem {
+        max-width: 90%; /* Reduz a largura do container em telas menores */
     }
 }
 
-/* Menu ativo para mobile */
-.menu.active {
-    display: block;
+/* Estilo para o popup de mensagem centralizado */
+.popup-message {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.9);
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centraliza o popup */
+    padding: 20px 30px;
+    background-color: #4CAF50; /* Cor de sucesso */
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    text-align: center;
+    cursor: pointer;
+    animation: fadeIn 0.3s ease-in-out;
 }
 
-.menu.active ul {
-    display: block;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.menu.active .bar:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 6px);
-}
-
-.menu.active .bar:nth-child(2) {
-    opacity: 0;
-}
-
-.menu.active .bar:nth-child(3) {
-    transform: rotate(-45deg) translate(6px, -6px);
+/* Animação de fade-in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
 }

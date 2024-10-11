@@ -1,56 +1,99 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('formCadastroCasa');
+document.addEventListener('DOMContentLoaded', () => {
+    buscarApartamentos();
+});
 
-    form.addEventListener('submit', function (event) {
-        event.preventDefault(); // Impede o envio padrão do formulário
-
-        const numeroap = document.getElementById('numeroap').value;
-        const bloco = document.getElementById('bloco').value;
-        const numerorel = document.getElementById('numerorel').value;
-        const kwhinicial = document.getElementById('kwhinicial').value;
-        const kwhatual = document.getElementById('kwhatual').value;
-        const valorKwh = document.getElementById('valorKwh').value;
-
-        // Monta o objeto com os dados do apartamento
-        const dadosCasa = {
-            numeroap,
-            bloco,
-            numerorel,
-            kwhinicial: parseFloat(kwhinicial), // Certifique-se de que esses valores sejam números
-            kwhatual: parseFloat(kwhatual),
-            ativo: true, // Define como ativo por padrão
-            valorKwh: parseFloat(valorKwh)
-        };
-
-        // Faz a requisição para o backend
-        fetch('http://localhost:5500/apartamentos', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(dadosCasa)
-        })
+function buscarApartamentos() {
+    fetch('http://localhost:5500/apartamentos?ativo=true')
         .then(response => {
             if (!response.ok) {
-                return response.json().then(err => {
-                    throw new Error(err.error || 'Erro desconhecido');
-                });
+                throw new Error('Erro ao buscar apartamentos');
             }
             return response.json();
         })
-        .then(data => {
-            console.log('Sucesso:', data);
-            document.getElementById('error-message').textContent = 'Apartamento cadastrado com sucesso!';
-            document.getElementById('error-message').className = 'success-message'; // Aplica a classe de sucesso
+        .then(apartamentos => {
+            const tabelaInquilinos = document.getElementById('tabelaInquilinos');
+            tabelaInquilinos.innerHTML = ''; // Limpa a tabela antes de preenchê-la
 
-            // Limpa os campos do formulário
-            form.reset(); // Isso limpa todos os campos do formulário
+            apartamentos.forEach(apartamento => {
+                const linha = document.createElement('tr');
+                linha.setAttribute('data-id', apartamento.id); // Captura o ID do apartamento
+
+                linha.innerHTML = `
+                    <td><input type="checkbox"></td>
+                    <td>${apartamento.numeroap}</td>
+                    <td>${apartamento.bloco}</td>
+                    <td>${apartamento.numerorel}</td>
+                    <td>${apartamento.kwhinicial}</td>
+                    <td>${apartamento.kwhatual}</td>
+                    <td>${apartamento.nome_inquilino}</td>
+                    <td>${apartamento.cpf_inquilino}</td>
+                    <td>${apartamento.ativo ? 'Ativo' : 'Inativo'}</td>
+                `;
+
+                tabelaInquilinos.appendChild(linha);
+            });
         })
         .catch(error => {
-            console.error('Erro:', error);
-            // Exibe a mensagem de erro específica retornada pela API
-            document.getElementById('error-message').textContent = 'Erro: ' + error.message;
-            document.getElementById('error-message').className = 'error-message'; // Aplica a classe de erro
+            console.error('Erro ao buscar apartamentos:', error);
         });
+}
+
+function deletarSelecionados() {
+    const checkboxes = document.querySelectorAll('#tabelaInquilinos input[type="checkbox"]:checked'); // Corrigido para tabelaInquilinos
+
+    if (checkboxes.length === 0) {
+        alert("Selecione pelo menos um apartamento para deletar.");
+        return;
+    }
+
+    // Pergunta de confirmação
+    if (!confirm("Tem certeza que deseja excluir?")) {
+        return; // Cancela a operação se o usuário clicar em "Cancelar"
+    }
+
+    const idsParaDeletar = [];
+    
+    checkboxes.forEach(checkbox => {
+        const linha = checkbox.closest('tr');
+        const id = linha.getAttribute('data-id'); // Captura o ID do apartamento
+        idsParaDeletar.push(id); // Adiciona o ID a lista
     });
-});
+
+    // Executa a exclusão
+    Promise.all(idsParaDeletar.map(id => {
+        return fetch(`http://localhost:5500/apartamentos/${id}`, { // Se for numeroap, certifique-se de que isso é correto
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro ao deletar apartamento com ID ${id}.`);
+            }
+            return id; // Retorna o ID para o próximo then
+        });
+    }))
+    .then(deletedIds => {
+        deletedIds.forEach(id => {
+            const linha = document.querySelector(`tr[data-id="${id}"]`);
+            if (linha) linha.remove(); // Remove a linha da tabela
+        });
+        mostrarPopup("Apartamento deletado com sucesso!");
+    })
+    .catch(error => {
+        console.error(error);
+        alert('Ocorreu um erro ao tentar deletar os apartamentos.');
+    });
+}
+
+function mostrarPopup(mensagem) {
+    // Cria o elemento popup
+    const popup = document.createElement('div');
+    popup.classList.add('popup-message');
+    popup.innerText = mensagem;
+    
+    document.body.appendChild(popup);
+    
+    // Remove o popup após 3 segundos
+    setTimeout(() => {
+        popup.remove();
+    }, 3000);
+}
