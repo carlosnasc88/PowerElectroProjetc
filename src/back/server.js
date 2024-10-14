@@ -6,6 +6,7 @@ const inquilinosRoutes = require('./routes/inquilinosRoutes');
 const usuarioRoutes = require ('./routes/usuarioRoutes')
 const apartamentosRoutes = require('./controllers/apartamentosController');
 const apartamentosController = require('./controllers/apartamentosController');
+const usuarioController = require('./src/back/controllers/controllerUsuario');
 
 const db = require('./database/db');
 
@@ -21,10 +22,13 @@ db.connect((err) => {
     console.log('Connected to PostgreSQL');
 });
 
+
+
 app.use('/inquilinos', inquilinosRoutes); 
 app.use('/apartamentos', apartamentosRoutes);
 app.use('/apartamentos', apartamentosController);
 app.use('/usuarios', usuarioRoutes);
+app.use('/usuarios', usuarioController);
 
 const PORT = process.env.PORT || 5500;
 app.listen(PORT, () => {

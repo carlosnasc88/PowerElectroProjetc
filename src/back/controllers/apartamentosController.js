@@ -84,5 +84,44 @@ router.delete('/:id', (req, res) => {
 });
 
 
+//Acesso usuários:
+/*
+let usuarios = [];  // Banco de dados temporário
+
+// Cadastro de usuários
+app.post('/usuarios/cadastrar', (req, res) => {
+    const { nome, email, senha, tipoUsuario } = req.body;
+
+    if (!nome || !email || !senha || !tipoUsuario) {
+        return res.status(400).json({ message: 'Preencha todos os campos' });
+    }
+
+    // Criar um novo usuário com base no tipo de usuário
+    const novoUsuario = {
+        nome,
+        email,
+        senha,
+        tipoUsuario,
+        permissoes: []  // Inicializar permissões vazias
+    };
+
+    // Atribuir permissões com base no tipo de usuário
+    if (tipoUsuario === 'Sindico') {
+        novoUsuario.permissoes = ['acesso_total'];  // O Síndico tem acesso a todos os módulos
+    } else if (tipoUsuario === 'Inquilino') {
+        novoUsuario.permissoes = ['acesso_restrito'];  // Inquilinos têm acesso limitado
+    }
+
+    // Salvar o usuário (aqui você pode salvar no banco de dados)
+    usuarios.push(novoUsuario);
+
+    res.status(201).json({ message: 'Usuário cadastrado com sucesso', usuario: novoUsuario });
+});
+
+// Iniciar o servidor
+app.listen(5500, () => {
+    console.log('Servidor rodando na porta 5500');
+});*/
+
 
 module.exports = router;
