@@ -121,6 +121,7 @@ h2{
     color: #fff;
     
 } */
+
 .input-box{
     position: relative;
     margin-bottom: 20px;
@@ -162,8 +163,12 @@ h2{
 
 
 .repurasenha{
-    position: relative;
-    margin-bottom: 20px;  
+    position: relflefative;
+    margin-bottom: 10px;  
+    text-decoration: underline;
+    text-align: right;
+    color: #fff;
+    font-size: 10px;
 
 }
 

@@ -1,25 +1,30 @@
-// Controller para cadastrar um novo usuário
-const cadastrarUsuario = async (req, res) => {
-    const { nome, email, senha } = req.body;
+const db = require('../database/db'); // Aqui você importa a conexão com o banco de dados
+
+// Função para cadastrar o usuário
+const cadastrarUsuario = (req, res) => {
+    const { nome: nome_completo, email, senha, tipoUsuario } = req.body;
 
     // Validação simples
-    if (!nome || !email || !senha) {
+    if (!nome_completo || !email || !senha || !tipoUsuario) {
         return res.status(400).json({ message: 'Preencha todos os campos' });
     }
 
-    try {
-        const query = 'INSERT INTO usuarios (nome_completo, email, senha) VALUES ($1, $2, $3)';
-        const values = [nome, email, senha];
+    // Query SQL para inserir o usuário
+    const query = `
+        INSERT INTO usuarios (nome_completo, email, senha, tipo_usuario)
+        VALUES ($1, $2, $3, $4) RETURNING *;
+    `;
 
-        await pool.query(query, values);
+    const values = [nome_completo, email, senha, tipoUsuario];
 
-        res.status(201).json({ message: 'Usuário cadastrado com sucesso!' });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Erro ao cadastrar o usuário' });
-    }
+    db.query(query, values, (error, result) => {
+        if (error) {
+            console.error('Erro ao cadastrar usuário:', error);
+            return res.status(500).json({ message: 'Erro ao cadastrar usuário' });
+        }
+        // Retorna o usuário cadastrado
+        res.status(201).json({ message: 'Usuário cadastrado com sucesso!', usuario: result.rows[0] });
+    });
 };
 
-module.exports = {
-    cadastrarUsuario,
-};
+module.exports = { cadastrarUsuario };

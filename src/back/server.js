@@ -6,8 +6,8 @@ const inquilinosRoutes = require('./routes/inquilinosRoutes');
 const usuarioRoutes = require ('./routes/usuarioRoutes')
 const apartamentosRoutes = require('./controllers/apartamentosController');
 const apartamentosController = require('./controllers/apartamentosController');
-const usuarioController = require('./src/back/controllers/controllerUsuario');
-
+const usuarioController = require('./controllers/controllerUsuario');
+const loginRoute = require('./routes/loginRoute');
 const db = require('./database/db');
 
 
@@ -29,7 +29,7 @@ app.use('/apartamentos', apartamentosRoutes);
 app.use('/apartamentos', apartamentosController);
 app.use('/usuarios', usuarioRoutes);
 app.use('/usuarios', usuarioController);
-
+app.use(loginRoute);
 const PORT = process.env.PORT || 5500;
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);

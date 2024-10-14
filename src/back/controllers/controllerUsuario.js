@@ -16,16 +16,16 @@ function verificarPermissao(permissaoRequerida) {
 
 // Rota para cadastrar usuário
 router.post('/cadastrar', (req, res) => {
-    const { nome, email, senha, tipoUsuario } = req.body;
+    const { nome: nome_completo, email, senha, tipoUsuario } = req.body;
 
     // Validação simples
-    if (!nome || !email || !senha || !tipoUsuario) {
+    if (!nome_completo || !email || !senha || !tipoUsuario) {
         return res.status(400).json({ message: 'Preencha todos os campos' });
     }
 
     // Lógica para salvar o usuário no banco de dados (fictício aqui)
     // Pode substituir por chamada ao banco real
-    const usuario = { nome, email, senha, tipoUsuario };
+    const usuario = { nome: nome_completo, email, senha, tipoUsuario };
     console.log('Usuário cadastrado:', usuario);
 
     return res.status(201).json({ message: 'Usuário cadastrado com sucesso!' });

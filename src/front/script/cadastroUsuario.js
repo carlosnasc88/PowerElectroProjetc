@@ -1,17 +1,17 @@
 async function cadastrarUsuario() {
-    const nome = document.getElementById('nome').value;
+    const nome_completo = document.getElementById('nome').value;
     const email = document.getElementById('email').value;
     const senha = document.getElementById('senha').value;
     const tipoUsuario = document.getElementById('tipodesusuario').value;  // Pegando o tipo de usuário
 
     // Validação simples
-    if (!nome || !email || !senha || !tipoUsuario) {
+    if (!nome_completo || !email || !senha || !tipoUsuario) {
         alert('Preencha todos os campos');
         return;
     }
 
     const usuario = {
-        nome: nome,
+        nome: nome_completo,
         email: email,
         senha: senha,
         tipoUsuario: tipoUsuario  // Enviando o tipo de usuário para o backend
