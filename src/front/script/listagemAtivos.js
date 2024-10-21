@@ -2,44 +2,58 @@ document.addEventListener('DOMContentLoaded', () => {
     buscarApartamentos();
 });
 
-function buscarApartamentos() {
-    fetch('http://localhost:5500/apartamentos?ativo=true')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Erro ao buscar apartamentos');
+async function buscarApartamentos() {
+    try {
+        const token = localStorage.getItem('userToken');  // Assume que o token foi salvo após o login
+        if (!token) {
+            alert('Usuário não autenticado');
+            window.location.href = '/login.html';  // Redireciona para o login se não autenticado
+            return;
+        }
+
+        // Requisição para buscar apartamentos do usuário logado
+        const response = await fetch('http://localhost:5500/apartamentos/usuario-logado', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,  // Envia o token no cabeçalho da requisição
+                'Content-Type': 'application/json'
             }
-            return response.json();
-        })
-        .then(apartamentos => {
-            const tabelaInquilinos = document.getElementById('tabelaInquilinos');
-            tabelaInquilinos.innerHTML = ''; // Limpa a tabela antes de preenchê-la
-
-            apartamentos.forEach(apartamento => {
-                const linha = document.createElement('tr');
-                linha.setAttribute('data-id', apartamento.id); // Captura o ID do apartamento
-
-                linha.innerHTML = `
-                    <td><input type="checkbox"></td>
-                    <td>${apartamento.numeroap}</td>
-                    <td>${apartamento.bloco}</td>
-                    <td>${apartamento.numerorel}</td>
-                    <td>${apartamento.kwhinicial}</td>
-                    <td>${apartamento.kwhatual}</td>
-                    <td>${apartamento.nome_inquilino}</td>
-                    <td>${apartamento.cpf_inquilino}</td>
-                    <td>${apartamento.ativo ? 'Ativo' : 'Inativo'}</td>
-                `;
-
-                tabelaInquilinos.appendChild(linha);
-            });
-        })
-        .catch(error => {
-            console.error('Erro ao buscar apartamentos:', error);
         });
+
+        if (!response.ok) {
+            throw new Error('Erro ao buscar apartamentos');
+        }
+
+        const apartamentos = await response.json();
+        const tabelaInquilinos = document.getElementById('tabelaInquilinos');
+        tabelaInquilinos.innerHTML = ''; // Limpa a tabela antes de preenchê-la
+
+        apartamentos.forEach(apartamento => {
+            const linha = document.createElement('tr');
+            linha.setAttribute('data-id', apartamento.id); // Captura o ID do apartamento
+
+            linha.innerHTML = `
+                <td><input type="checkbox"></td>
+                <td>${apartamento.numeroap}</td>
+                <td>${apartamento.bloco}</td>
+                <td>${apartamento.numerorel}</td>
+                <td>${apartamento.kwhinicial}</td>
+                <td>${apartamento.kwhatual}</td>
+                <td>${apartamento.nome_inquilino}</td>
+                <td>${apartamento.cpf_inquilino}</td>
+                <td>${apartamento.ativo ? 'Ativo' : 'Inativo'}</td>
+            `;
+
+            tabelaInquilinos.appendChild(linha);
+        });
+    } catch (error) {
+        console.error('Erro ao buscar apartamentos:', error);
+        alert('Erro ao carregar os dados dos apartamentos.');
+    }
 }
 
 function deletarSelecionados() {
-    const checkboxes = document.querySelectorAll('#tabelaAtivos input[type="checkbox"]:checked');
+    const checkboxes = document.querySelectorAll('#tabelaInquilinos input[type="checkbox"]:checked');
 
     if (checkboxes.length === 0) {
         alert("Selecione pelo menos um apartamento para deletar.");
@@ -52,17 +66,20 @@ function deletarSelecionados() {
     }
 
     const idsParaDeletar = [];
-    
+
     checkboxes.forEach(checkbox => {
         const linha = checkbox.closest('tr');
         const id = linha.getAttribute('data-id'); // Captura o ID do apartamento
-        idsParaDeletar.push(id); // Adiciona o ID a lista
+        idsParaDeletar.push(id); // Adiciona o ID à lista
     });
 
     // Executa a exclusão
     Promise.all(idsParaDeletar.map(id => {
         return fetch(`http://localhost:5500/apartamentos/${id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('userToken')}`  // Autenticação
+            }
         })
         .then(response => {
             if (!response.ok) {
@@ -89,12 +106,11 @@ function mostrarPopup(mensagem) {
     const popup = document.createElement('div');
     popup.classList.add('popup-message');
     popup.innerText = mensagem;
-    
+
     document.body.appendChild(popup);
-    
+
     // Remove o popup após 3 segundos
     setTimeout(() => {
         popup.remove();
     }, 3000);
 }
-

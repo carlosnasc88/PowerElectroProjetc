@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar Senha</title>
+    <link rel="stylesheet" href="/src/front/style/estilo.css">
+</head>
+
+<body>
+    <div class="container_cadastro">
+        <h1>Recuperar Senha</h1>
+        <form id="recuperarSenhaForm">
+            <input type="text" id="email" name="email" placeholder="Digite seu e-mail" required>
+            <div class="button-group">
+                <button type="submit" class="submit">Enviar</button>
+                <button type="button" class="cancel" onclick="voltar()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="popupMessage" class="popup-message" style="display: none;">
+        Email enviado com sucesso!
+    </div>
+
+    <script src="recuperarSenha.js"></script>
+</body>
+
+</html>
